@@ -1,0 +1,36 @@
+<ion-view view-title="Pay Now">
+  <ion-content class="padding">
+    <div style="text-align:center;">
+      <h1>{{PaymentData.Amount | currency : '&#8377;' }}</h1>
+      <span class="badge badge-assertive">{{PaymentData.Note}}</span>
+    </div>
+    <p class="padding-top"><b>Note:</b> The text will take the color of the applied button style, meaning button-positive will result in blue text and no border instead of a blue background.</p>
+    <button class="button button-full button-energized" ng-click="payNow()" ng-show="payData.length <= 0">
+      Pay Now
+    </button>
+    <div style="text-align:center;" ng-show="payData.length > 0 && lastStatus=='BILL_CREATED'">
+      <h1>Waiting for Payment Confirmation... <ion-spinner icon="spiral"></ion-spinner></h1>
+      <b>Please do not hit Back Button</b>
+    </div>
+    <div style="text-align:center;" ng-show="payData.length > 0 && lastStatus=='PAYMENT_FAILED'">
+      <h1 class="assertive"><i class="icon ion-ios-close-outline"></i>&nbsp;Payment Failed!</h1>
+      <b>Due to some technical issues, the payment is failed. Please try after some time!</b>
+    </div>
+    <div style="text-align:center;" ng-show="payData.length > 0 && lastStatus=='SETTLEMENT_FAILED'">
+      <h1 class="energized"><i class="icon ion-alert-circled"></i>&nbsp;Payment Successful but Settlement Failed!</h1>
+      <b>Due to some technical issues, the payment settlement is failed. Please check the Fee Status after some time!</b>
+    </div>
+    <div style="text-align:center;" ng-show="payData.length > 0 && lastStatus=='BILL_EXPIRED'">
+      <h1 class="energized"><i class="icon ion-alert-circled"></i>&nbsp;Payment Link Expired!</h1>
+      <b>The payment link is expired. Please try again!</b>
+    </div>
+    <div style="text-align:center;" ng-show="payData.length > 0 && lastStatus=='SETTLEMENT_SUCCESSFUL'">
+      <h1 class="balanced"><i class="icon ion-android-checkmark-circle"></i>&nbsp;Payment Successful!</h1>
+      <b>Redirecting you to dashboard, please wait <ion-spinner icon="spiral"></ion-spinner></b>
+    </div>
+    <div style="text-align:center;" ng-show="payData.length > 0 && (lastStatus=='PAYMENT_SUCCESSFUL' || lastStatus=='CREDIT_RECEIVED')">
+      <h1 class="balanced"><i class="icon ion-android-checkmark-circle"></i>&nbsp;Payment Successful!</h1>
+      <b>Wating for the amount credit in school account, please wait <ion-spinner icon="spiral"></ion-spinner></b>
+    </div>
+  </ion-content>
+</ion-view>

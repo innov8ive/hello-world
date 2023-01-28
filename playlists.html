@@ -1,0 +1,9 @@
+<ion-view view-title="Playlists">
+  <ion-content>
+    <div class="r">
+      <div class="column" ng-repeat="img in allImages" ng-click="showImages($index)">
+        <img src="{{img.src}}" style="width:100%">
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,27 @@
+<ion-view view-title="Search">
+  <ion-content>
+
+    <div class="card">
+      <div class="item item-divider">
+        Select Fees to Pay
+      </div>
+
+      <ion-list ng-repeat="c in cards track by $index">
+        <ion-checkbox ng-model="c.Selected" ng-change="checkboxClick(c, $index)">
+          <h3>{{c.FeeName}}</h3>
+          Due Date: {{c.DueDate}}
+          <h3 class="item-note">{{c.Amount | currency : '&#8377;' }}</h3>
+        </ion-checkbox>
+      </ion-list>
+      <div class="item item-divider">
+        Total Selected Fee :<span class="item-note">
+          <b>{{totalAmountSelected() | currency : '&#8377;' }}</b>
+        </span>
+      </div>
+      <button class="button button-full button-energized" ng-show="totalAmountSelected()>0" ng-click="payNow()">
+        Pay Now
+      </button>
+    </div>
+
+  </ion-content>
+</ion-view>
